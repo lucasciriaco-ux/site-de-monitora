@@ -1,0 +1,301 @@
+/* =============================================
+   style.css - Monitoria CEMCS
+   Design moderno, clean e responsivo (mobile-first)
+   ============================================= */
+
+:root {
+    /* Paleta de cores institucional */
+    --primary: #0052CC;
+    --primary-dark: #003399;
+    --accent: #00B074;
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+    --bg-light: #F8FAFC;
+    --white: #FFFFFF;
+    --border: #E2E8F0;
+    --success: #10B981;
+    --warning: #F59E0B;
+
+    /* Tipografia */
+    --font-primary: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-base: 1rem;
+    --font-size-h1: 2.25rem;
+    --font-size-h2: 1.75rem;
+    --font-size-h3: 1.25rem;
+}
+
+/* Reset e configurações base */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    font-size: var(--font-size-base);
+}
+
+/* ====================== HEADER ====================== */
+header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+header p {
+    font-size: 1.05rem;
+    opacity: 0.95;
+    max-width: 500px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ====================== MAIN ====================== */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+#inicio {
+    text-align: center;
+    background: white;
+    padding: 2.5rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#inicio h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+#vagas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+article {
+    background: white;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 82, 204, 0.15);
+}
+
+article h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.35rem;
+}
+
+article p {
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+article strong {
+    color: var(--text-dark);
+}
+
+/* Botões */
+button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 200px;
+}
+
+button:hover {
+    background-color: #00996a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 176, 116, 0.3);
+}
+
+button:focus {
+    outline: 3px solid rgba(0, 176, 116, 0.4);
+}
+
+/* Aside (Avisos) */
+aside {
+    background: white;
+    padding: 1.75rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    border-left: 5px solid var(--warning);
+}
+
+aside h3 {
+    color: var(--warning);
+    margin-bottom: 1rem;
+}
+
+aside ul {
+    list-style: none;
+}
+
+aside li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+aside li:last-child {
+    border-bottom: none;
+}
+
+aside li::before {
+    content: "⚠️";
+    position: absolute;
+    left: 0;
+}
+
+/* ====================== FOOTER ====================== */
+footer {
+    background-color: #1F2937;
+    color: #CBD5E1;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* ====================== RESPONSIVIDADE ====================== */
+
+/* Tablet */
+@media (min-width: 768px) {
+    header .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    main {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    #vagas {
+        grid-column: 1 / -1;
+    }
+
+    button {
+        width: auto;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    main {
+        grid-template-columns: 2.5fr 1fr;
+    }
+
+    article {
+        padding: 2rem;
+    }
+
+    header {
+        padding: 1.5rem 0;
+    }
+
+    header .header-content {
+        padding: 0 1rem;
+    }
+}
+
+/* Acessibilidade e melhorias */
+a:focus,
+button:focus {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Melhorias visuais adicionais */
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+p {
+    color: var(--text-light);
+}
+
+/* Container utility */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}

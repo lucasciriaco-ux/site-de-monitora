@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoria CEMCS - Sistema de Monitoria</title>
+    <style>
+        :root {
+            --primary: #0052CC;
+            --primary-dark: #003399;
+            --accent: #00B074;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --border: #E2E8F0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        h1 { font-size: 1.8rem; }
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        nav a:hover { background: rgba(255,255,255,0.2); }
+
+        main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .login-container {
+            max-width: 420px;
+            margin: 4rem auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        button:hover { background: #00996a; transform: translateY(-2px); }
+
+        article {
+            background: white;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1F2937;
+            color: #CBD5E1;
+            margin-top: 3rem;
+        }
+
+        .message { margin-top: 10px; font-weight: 500; }
+        .success { color: var(--accent); }
+        .error { color: #EF4444; }
+
+        ul { list-style: none; }
+        .btn-cancelar {
+            background: #EF4444;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>Monitoria CEMCS</h1>
+                <p>Sistema de Gestão de Monitorias</p>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#" data-page="inicio">Início</a></li>
+                    <li><a href="#" data-page="vagas">Vagas</a></li>
+                    <li><a href="#" data-page="agendamento">Agendar</a></li>
+                    <li><a href="#" data-page="dashboard" id="nav-dashboard" style="display:none;">Dashboard</a></li>
+                    <li><a href="#" id="btn-logout" style="display:none;">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- LOGIN -->
+        <section id="section-login" class="page active">
+            <div class="login-container">
+                <h2>Entrar no Sistema</h2>
+                <form id="login-form">
+                    <input type="email" id="email" placeholder="Seu e-mail institucional" required>
+                    <input type="password" id="senha" placeholder="Senha" required minlength="6">
+                    <button type="submit">Entrar</button>
+                    <p id="login-message" class="message"></p>
+                </form>
+                <p style="margin-top:15px; font-size:0.9rem; color:#666;">
+                    Dica: Use qualquer e-mail e senha (mín. 6 caracteres)
+                </p>
+            </div>
+        </section>
+
+        <!-- INÍCIO -->
+        <section id="section-inicio" class="page">
+            <h2>Bem-vindo ao Portal de Monitoria CEMCS</h2>
+            <p style="font-size:1.1rem; max-width:700px; margin:1.5rem auto;">
+                Gerencie suas monitorias, candidate-se a novas vagas e acompanhe seu desempenho acadêmico.
+            </p>
+        </section>
+
+        <!-- VAGAS -->
+        <section id="section-vagas" class="page">
+            <h2>Editais e Vagas Abertas</h2>
+            <article>
+                <h3>Monitoria de Algoritmos e Programação</h3>
+                <p><strong>Departamento:</strong> Ciência da Computação</p>
+                <p><strong>Pré-requisitos:</strong> Nota ≥ 8.0 na disciplina</p>
+                <p><strong>Período:</strong> 01/08 a 15/08/2026</p>
+                <button class="btn-inscrever">Inscrever-se</button>
+            </article>
+
+            <article>
+                <h3>Monitoria de Cálculo I</h3>
+                <p><strong>Departamento:</strong> Matemática</p>
+                <p><strong>Pré-requisitos:</strong> Aprovação em Cálculo I</p>
+                <p><strong>Período:</strong> 05/08 a 20/08/2026</p>
+                <button class="btn-inscrever">Inscrever-se</button>
+            </article>
+        </section>
+
+        <!-- AGENDAMENTO -->
+        <section id="section-agendamento" class="page">
+            <h2>Agendar Monitoria</h2>
+            <form id="agendamento-form" style="max-width:600px; background:white; padding:2rem; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
+                <input type="text" id="disciplina" placeholder="Disciplina (ex: Banco de Dados)" required>
+                <input type="date" id="data" required>
+                <input type="time" id="horario" required>
+                <button type="submit">Confirmar Agendamento</button>
+            </form>
+
+            <h3 style="margin-top:2rem;">Meus Agendamentos</h3>
+            <ul id="lista-agendamentos" style="background:white; padding:1rem; border-radius:10px;"></ul>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="section-dashboard" class="page">
+            <h2>Dashboard do Monitor</h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; margin-top:1.5rem;">
+                <div class="card"><strong>2</strong><br>Monitorias Ativas</div>
+                <div class="card"><strong>48h</strong><br>Horas Realizadas</div>
+                <div class="card"><strong>1</strong><br>Relatório Pendente</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Monitoria CEMCS. Todos os direitos reservados.</p>
+        <p>Desenvolvido para fins acadêmicos</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let usuarioLogado = null;
+            let agendamentos = [];
+
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('nav a[data-page]');
+            const btnLogout = document.getElementById('btn-logout');
+            const navDashboard = document.getElementById('nav-dashboard');
+
+            function showPage(pageId) {
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById(`section-${pageId}`).classList.add('active');
+            }
+
+            // Navegação
+            navLinks.forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    if ((page === 'dashboard' || page === 'agendamento') && !usuarioLogado) {
+                        alert('Você precisa fazer login primeiro!');
+                        return;
+                    }
+                    showPage(page);
+                });
+            });
+
+            // Login
+            document.getElementById('login-form').addEventListener('submit', e => {
+                e.preventDefault();
+                const email = document.getElementById('email').value.trim();
+                const senha = document.getElementById('senha').value.trim();
+
+                if (senha.length < 6) {
+                    alert('A senha deve ter no mínimo 6 caracteres.');
+                    return;
+                }
+
+                usuarioLogado = { email };
+                document.getElementById('login-message').innerHTML = 
+                    `<span class="success">Login realizado com sucesso!</span>`;
+
+                setTimeout(() => {
+                    document.getElementById('section-login').style.display = 'none';
+                    navDashboard.style.display = 'inline';
+                    btnLogout.style.display = 'inline';
+                    showPage('dashboard');
+                }, 700);
+            });
+
+            // Logout
+            btnLogout.addEventListener('click', () => {
+                if (confirm('Deseja sair do sistema?')) {
+                    usuarioLogado = null;
+                    navDashboard.style.display = 'none';
+                    btnLogout.style.display = 'none';
+                    document.getElementById('section-login').style.display = 'block';
+                    showPage('inicio');
+                }
+            });
+
+            // Agendamentos
+            document.getElementById('agendamento-form').addEventListener('submit', e => {
+                e.preventDefault();
+                if (!usuarioLogado) {
+                    alert('Faça login para agendar monitorias.');
+                    return;
+                }
+
+                const disciplina = document.getElementById('disciplina').value;
+                const data = document.getElementById('data').value;
+                const horario = document.getElementById('horario').value;
+
+                agendamentos.push({ disciplina, data, horario, id: Date.now() });
+                renderAgendamentos();
+                e.target.reset();
+                alert('Agendamento realizado com sucesso!');
+            });
+
+            function renderAgendamentos() {
+                const lista = document.getElementById('lista-agendamentos');
+                lista.innerHTML = '';
+
+                if (agendamentos.length === 0) {
+                    lista.innerHTML = '<li>Nenhum agendamento cadastrado ainda.</li>';
+                    return;
+                }
+
+                agendamentos.forEach(ag => {
+                    const li = document.createElement('li');
+                    li.style.padding = '12px';
+                    li.style.margin = '8px 0';
+                    li.style.border = '1px solid #ddd';
+                    li.style.borderRadius = '8px';
+                    li.innerHTML = `
+                        <strong>${ag.disciplina}</strong><br>
+                        📅 ${ag.data} • ${ag.horario}
+                        <button class="btn-cancelar" data-id="${ag.id}" style="float:right;">Cancelar</button>
+                    `;
+                    lista.appendChild(li);
+                });
+
+                document.querySelectorAll('.btn-cancelar').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = parseInt(btn.getAttribute('data-id'));
+                        agendamentos = agendamentos.filter(a => a.id !== id);
+                        renderAgendamentos();
+                    });
+                });
+            }
+
+            // Inscrições
+            document.querySelectorAll('.btn-inscrever').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (!usuarioLogado) {
+                        alert('Faça login para se inscrever.');
+                        return;
+                    }
+                    alert('Inscrição realizada com sucesso! ✅');
+                });
+            });
+
+            // Inicialização
+            showPage('inicio');
+        });
+    </script>
+</body>
+</html>
